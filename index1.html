@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report a Morphing Incident</title>
+    <style>
+        .text-button-container {
+            text-align: center; /* Centering the content */
+            margin-top: 50px; /* Adjust this margin as needed */
+        }
+        .button-link {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .button-link:hover {
+            background-color: #0056b3;
+        }
+        
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            background-image: url('https://marketingaccesspass.com/wp-content/uploads/2015/10/Podcast-Website-Design-Background-Image-1024x553.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Sidebar styling */
+        .sidebar {
+            width: 200px;
+            height: 100vh; /* Full height of the viewport */
+            background-color: #f4f4f4;
+            box-shadow: 4px 0 8px rgba(0, 0, 0, 0.1);
+            position: fixed; /* Fixed positioning to keep sidebar in place */
+            left: 0; /* Align to the left */
+            padding: 20px;
+            overflow-y: auto; /* Allow scrolling */
+        }
+
+        /* Content styling */
+        .content {
+            margin-left: 210px; /* Adjusted to not overlap the sidebar */
+            width: calc(100% - 210px); /* Remaining width */
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+            height: calc(100vh - 40px); /* Adjusted height */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            overflow-y: auto; /* Allow scrolling */
+        }
+
+        /* Form and elements styling */
+        h1, h2 {
+            color: #333;
+            text-align: center;
+        }
+
+        form {
+            max-width: 600px; /* Maximum width of the form */
+            margin: 0 auto; /* Centering the form */
+            padding: 20px;
+            background-color: #fff; /* White background for the form */
+        }
+
+        input[type="text"], input[type="url"],input[type="email"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 150px;
+            }
+
+            .content {
+                margin-left: 150px;
+                width: calc(100% - 150px);
+            }
+        }
+    </style>
+
+    
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Instructions</h2>
+        <ul>
+            <li>With the rise of digital platforms, women's safety in the online space has become a significant concern, especially with issues like morphing. 
+                ‌Morphing detection plays a crucial role in women's safety. </li>
+            <li>‌To detect these kinds of morphing, we have created the morphing detection system. 
+                ‌To use this website, or to ensure that your morphed video or photos have to be safe and secure, you just need to register only with your name and the email, no need of log in onto the website. </li>
+            <li>‌firstly, you will be in need of sending us the link (URL) , that is the social media link, where your morphed video of photos has been posted and mention about the incident (If you want). </li>
+            <li>With your mentioned link in our website, we can case a file against that social media account and take further process to detect the videos and photos by means of the datasets provided and finally , will able to delete all the records regarding the issue on the social medias. </li>
+            <li>‌In which, we have the End to End Encryption, is a security measure that ensures only you and our website communicating with can read what is sent.
+                ‌Our website simply protects your communications from unauthorized access and ensures your personal information and conversations remain private and secure.</li>
+            <li>For the contact, make sure to click on the arrow button given on the instructions part. 
+                ‌We do not share or store your data beyond the analysis period.
+                ‌If you need assistance, contact our support team via chat or email.➡️➡️➡️</li>
+            
+        </ul>
+        
+    </div>
+    <div class="content">
+        <h1>Report a Morphing Incident</h1>
+        <form id="incidentForm" action="/report" method="POST">
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" name="name" required><br>
+            <label for="email">Email Id:</label>
+            <input type="email" id="email" name="email" required><br>
+            <label for="social_media">Social Media Link:</label>
+            <input type="url" id="social_media" name="social_media" required><br>
+            <label for="description">Incident Description:</label>
+            <textarea id="description" name="description" required></textarea><br>
+            <button type="submit">Submit Report</button>
+            <div class="text-button-container">
+                <p>Need an Psychological support</p>
+                <a href="page2.html" class="button-link">Get it for free</a>
+            </div>
+        </form>
+    </div>
+    
+</body>
+<footer>
+  
+</footer>
+</html>

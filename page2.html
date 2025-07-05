@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .content-container { display: flex; justify-content: space-between; align-items: flex-start; }
+        .left-content { width: 40%; padding: 20px; box-sizing: border-box; }
+        .right-content img { width: 100%; height: auto; }
+        .form-container { display: none; margin-top: 20px; }
+        .form-container label { display: block; margin: 10px 0 5px; }
+        .form-container select, .form-container input[type="email"] { padding: 10px; width: 100%; border: 1px solid #ccc; border-radius: 5px; }
+        .form-container input[type="submit"] { margin-top: 10px; padding: 10px 20px; background-color: #007BFF; color: white; border: none; cursor: pointer; border-radius: 5px; }
+        .form-container input[type="submit"]:hover { background-color: #0056b3; }
+    </style>
+</head>
+<body>
+    <div class="content-container">
+        <div class="left-content">
+            <h2>Need Psychological Support? Book an Appointment!</h2>
+            <button onclick="toggleForm()">Book Appointment</button>
+            <div id="appointmentForm" class="form-container">
+                <form id="appointmentForm" onsubmit="showPopup(event)">
+                    <label for="session">Select Session:</label>
+                    <select id="session" name="session">
+                        <option value="FN">Forenoon</option>
+                        <option value="AN">Afternoon</option>
+                    </select>
+
+                    <label for="availability">Choose Availability:</label>
+                    <select id="availability" name="availability">
+                        <option value="March 18">March 18</option>
+                        <option value="March 22">March 22</option>
+                        <option value="March 25">March 25</option>
+                        <option value="March 28">March 28</option>
+                        <option value="March 31">March 31</option>
+                        <option value="April 2">April 2</option>
+                        <option value="April 6">April 6</option>
+                        <option value="April 9">April 9</option>
+                        <option value="April 12">April 12</option>
+                    </select>
+
+                    <label for="email">Enter Your Email:</label>
+                    <input type="email" id="email" name="email" placeholder="Your email" required>
+
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+        <div class="right-content">
+            <img src="https://static.vecteezy.com/system/resources/previews/017/776/465/original/woman-during-a-mental-therapy-session-with-a-psychotherapist-or-psychologist-two-women-are-sitting-and-talking-mental-health-concept-illustration-vector.jpg" alt="Therapy Session">
+        </div>
+    </div>
+
+    <script>
+        function toggleForm() {
+            const formContainer = document.getElementById('appointmentForm');
+            formContainer.style.display = formContainer.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function showPopup(event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const session = document.getElementById('session').value;
+            const availability = document.getElementById('availability').value;
+
+            const existingAppointment = JSON.parse(localStorage.getItem(email));
+
+            if (existingAppointment) {
+                alert(`You already have an appointment on ${existingAppointment.day} (${existingAppointment.session}).\nYour token number: ${existingAppointment.token}`);
+            } else {
+                const token = Math.floor(Math.random() * 1000) + 1;
+                localStorage.setItem(email, JSON.stringify({ day: availability, session, token }));
+                
+                fetch('/send-email', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email: email,
+                        session: session,
+                        availability: availability,
+                        token: token,
+                        receiverEmail: 'naveenapandi20@gmail.com'  
+                    })
+                });
+                
+                alert("Your appointment has been booked! You will receive a confirmation email shortly.");
+            }
+
+            updateAvailability();
+        }
+
+        function updateAvailability() {
+            const availabilitySelect = document.getElementById('availability');
+            for (let i = 0; i < availabilitySelect.options.length; i++) {
+                const date = availabilitySelect.options[i].value;
+                const isBooked = Object.values(localStorage).some(appointment => {
+                    const appt = JSON.parse(appointment);
+                    return appt.day === date;
+                });
+                availabilitySelect.options[i].disabled = isBooked;
+            }
+        }
+
+        window.onload = updateAvailability;
+    </script>
+</body>
+</html>
